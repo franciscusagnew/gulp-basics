@@ -37,7 +37,7 @@ gulp.task('mimifyScripts', ['concatScripts'], function() {
 // 	return gulp.src("scss/application.scss")
 // 	.pipe(maps.init())
 // 	.pipe(sass())
-// 	.pipe(maos.write('./'))
+// 	.pipe(maps.write('./'))
 // 	.pipe(gulp.dest('css'));
 // });
 
@@ -45,6 +45,22 @@ gulp.task('mimifyScripts', ['concatScripts'], function() {
 // 	gulp.watch('scss/**/*.scss', ['compileSass']);
 // });
 
-gulp.task('build', ['mimifyScripts']);
+// Compile Css files
+// gulp.task('compileCss', function() {
+// 	return gulp.src("css/style.css")
+// 	.pipe(maps.init())
+// 	.pipe()
+// 	.pipe(maps.write('./'))
+// 	.pipe(gulp.dest('css'));
+// });
+
+// gulp.task("watchCss", function() {
+// 	gulp.watch('css/*.css', ['compileCss']);
+// });
+
+gulp.task('build', ['mimifyScripts'], function() {
+	return gulp.src(["css/style.css", "js/app.min.js", "index.html", "img/**", "fonts/**"], { base: './'})
+	.pipe(gulp.dest('dist'));
+});
 
 gulp.task("default", ["build"]);

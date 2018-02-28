@@ -32,17 +32,17 @@ gulp.task('mimifyScripts', ['concatScripts'], function() {
 	.pipe(gulp.dest("js"));
 });
 
-// Compile sass files
-// gulp.task('compileCss', function() {
-// 	return gulp.src("css/style.css")
+// Compile Sass files
+// gulp.task('compileSass', function() {
+// 	return gulp.src("scss/application.scss")
 // 	.pipe(maps.init())
-// 	.pipe(css())
+// 	.pipe(sass())
 // 	.pipe(maos.write('./'))
 // 	.pipe(gulp.dest('css'));
 // });
 
-// gulp.task("watch", function() {
-// 	gulp.watch(['css/*.css', 'js/*.js'], ['compileCss', 'mimifyScripts']);
+// gulp.task("watchSass", function() {
+// 	gulp.watch('scss/**/*.scss', ['compileSass']);
 // });
 
 gulp.task('build', ['mimifyScripts']);

@@ -13,7 +13,7 @@ var gulp = require('gulp'),
 
 // Concatenate script files
 gulp.task("concatScripts", function() {
-	gulp.src([
+	return gulp.src([
 		'js/jquery.min.js', 
 		'js/popper.js',
 		'js/bootstrap.min.js',
@@ -25,8 +25,8 @@ gulp.task("concatScripts", function() {
 });
 
 // Mimify script files
-gulp.task('mimifyScripts', function() {
-	gulp.src("js/app.js")
+gulp.task('mimifyScripts', ['concatScripts'], function() {
+	return gulp.src("js/app.js")
 	.pipe(uglify())
 	.pipe(rename('app.min.js'))
 	.pipe(gulp.dest("js"));
@@ -34,13 +34,11 @@ gulp.task('mimifyScripts', function() {
 
 // Compile sass files
 // gulp.task('compileSass', function() {
-// 	gulp.src("scss/application.scss")
+// 	return gulp.src("scss/application.scss")
 // 	.pipe(sass())
 // 	.pipe(gulp.dest('css'));
 // });
 
-gulp.task('build', ['concatScripts', 'mimifyScripts']);
+gulp.task('build', ['mimifyScripts']);
 
-gulp.task("default", ["hello"], function() {
-	console.log("This is the default Gulp task!");
-});
+gulp.task("default", ["build"]);

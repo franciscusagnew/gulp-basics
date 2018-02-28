@@ -39,6 +39,8 @@ gulp.task('mimifyScripts', function() {
 // 	.pipe(gulp.dest('css'));
 // });
 
+gulp.task('build', ['concatScripts', 'mimifyScripts']);
+
 gulp.task("default", ["hello"], function() {
 	console.log("This is the default Gulp task!");
 });

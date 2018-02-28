@@ -33,10 +33,16 @@ gulp.task('mimifyScripts', ['concatScripts'], function() {
 });
 
 // Compile sass files
-// gulp.task('compileSass', function() {
-// 	return gulp.src("scss/application.scss")
-// 	.pipe(sass())
+// gulp.task('compileCss', function() {
+// 	return gulp.src("css/style.css")
+// 	.pipe(maps.init())
+// 	.pipe(css())
+// 	.pipe(maos.write('./'))
 // 	.pipe(gulp.dest('css'));
+// });
+
+// gulp.task("watch", function() {
+// 	gulp.watch(['css/*.css', 'js/*.js'], ['compileCss', 'mimifyScripts']);
 // });
 
 gulp.task('build', ['mimifyScripts']);

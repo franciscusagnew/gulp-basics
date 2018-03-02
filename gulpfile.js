@@ -29,14 +29,10 @@ var options = {
 	}
 };
 
-wrench.readdirSyncRecursive('./gulp').filter(function(file) {
-	return (/\.(js|coffee)$/i).test(file);
-}).map(function(file) {
-	require('./gulp/' + file)(options);
-});
-
-// gulp.task("hello", function() {
-// 	console.log("Hello, Gulp!");
+// wrench.readdirSyncRecursive('./gulp').filter(function(file) {
+// 	return (/\.(js|coffee)$/i).test(file);
+// }).map(function(file) {
+// 	require('./gulp/' + file)(options);
 // });
 
 // Concatenate script files
@@ -78,19 +74,6 @@ gulp.task('mimifyCss', function() {
 
 // gulp.task("watchSass", function() {
 // 	gulp.watch('scss/**/*.scss', ['compileSass']);
-// });
-
-// Compile Css files
-// gulp.task('compileCss', function() {
-// 	return gulp.src("css/style.css")
-// 	.pipe(maps.init())
-// 	.pipe()
-// 	.pipe(maps.write('./'))
-// 	.pipe(gulp.dest('css'));
-// });
-
-// gulp.task("watchCss", function() {
-// 	gulp.watch('css/*.css', ['compileCss']);
 // });
 
 gulp.task('watchFiles', function() {

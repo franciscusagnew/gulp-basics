@@ -5,6 +5,9 @@ var gulp = require('gulp'),
 	uglify = require('gulp-uglify'),
 	rename = require('gulp-rename'),
 	sass = require('gulp-sass'),
+	del = require('del'),
+	browserSync = require('browser-sync'),
+	reload = browserSync.reload,
 	maps = require('gulp-sourcemaps');
 
 // gulp.task("hello", function() {
@@ -30,6 +33,13 @@ gulp.task('mimifyScripts', ['concatScripts'], function() {
 	.pipe(uglify())
 	.pipe(rename('app.min.js'))
 	.pipe(gulp.dest("js"));
+});
+
+gulp.task('mimifyCss', function() {
+	return gulp.src("css/*.css")
+	.pipe(watch('css/*.css'))
+	.pipe(rename('style.min.css'))
+	.pipe(gulp.dest("css"));
 });
 
 // Compile Sass files
@@ -58,9 +68,29 @@ gulp.task('mimifyScripts', ['concatScripts'], function() {
 // 	gulp.watch('css/*.css', ['compileCss']);
 // });
 
+gulp.task('watchFiles', function() {
+	gulp.watch('js/app.js', ['concatScripts']);
+});
+
+gulp.task('clean', function() {
+	del(['dist', 'css/application.css*', 'js/app*.js*']);
+});
+
 gulp.task('build', ['mimifyScripts'], function() {
 	return gulp.src(["css/style.css", "js/app.min.js", "index.html", "img/**", "fonts/**"], { base: './'})
 	.pipe(gulp.dest('dist'));
 });
 
-gulp.task("default", ["build"]);
+gulp.task('serve', ['watchFiles'], function() {
+	browserSync({
+		server: {
+			baseDir: './'
+		}
+	});
+
+	gulp.watch(['css/**/*.css'], {cwd: 'g./'}, reload);
+});
+
+gulp.task("default", ["clean"], function() {
+	gulp.start('build');
+});

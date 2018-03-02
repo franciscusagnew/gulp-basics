@@ -17,6 +17,7 @@
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.0",
+    "gulp-util": "^3.0.8",
     "wrench": "^1.5.9"
   }
 }

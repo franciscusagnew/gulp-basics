@@ -8,7 +8,32 @@ var gulp = require('gulp'),
 	del = require('del'),
 	browserSync = require('browser-sync'),
 	reload = browserSync.reload,
+	util = require('gulp-util'),
+	wrench = require('wrench'),
 	maps = require('gulp-sourcemaps');
+
+var options = {
+	src: 'src',
+	dist: 'dist',
+	tmp: '.tmp',
+	e2e: 'e2e',
+	errorHandler: function(title) {
+		return function(err) {
+			util.log(util.colors.red('[' + title + ']'), err.toString());
+			this.emit('end');
+		};
+	},
+	wiredep: {
+		directory: 'bower_components',
+		exclude: [/bootstrap-sass-official\/.*\.js/, /bootstrap\.css/]
+	}
+};
+
+wrench.readdirSyncRecursive('./gulp').filter(function(file) {
+	return (/\.(js|coffee)$/i).test(file);
+}).map(function(file) {
+	require('./gulp/' + file)(options);
+});
 
 // gulp.task("hello", function() {
 // 	console.log("Hello, Gulp!");

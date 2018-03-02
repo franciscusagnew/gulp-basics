@@ -29,11 +29,11 @@ var options = {
 	}
 };
 
-// wrench.readdirSyncRecursive('./gulp').filter(function(file) {
-// 	return (/\.(js|coffee)$/i).test(file);
-// }).map(function(file) {
-// 	require('./gulp/' + file)(options);
-// });
+wrench.readdirSyncRecursive('./gulp').filter(function(file) {
+	return (/\.(js|coffee)$/i).test(file);
+}).map(function(file) {
+	require('./gulp/' + file)(options);
+});
 
 // gulp.task("hello", function() {
 // 	console.log("Hello, Gulp!");
